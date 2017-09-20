@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         val isExpired = AccessToken.getCurrentAccessToken()?.isExpired ?: true
         if (isExpired) {
             println("Expired!!!")
-            replaceFragment(R.id.contentFrame, LoginFragment())
+            replaceFragment(android.R.id.content, LoginFragment())
         } else {
             println("Logged in!!!")
         }

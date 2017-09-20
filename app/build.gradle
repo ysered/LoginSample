@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.ysered.loginsample"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -22,9 +23,9 @@ android {
 }
 
 ext {
-    supportLibraryVersion = '25.3.1'
+    supportLibraryVersion = '26.1.0'
     constraintLayoutVersion = '1.0.2'
-    archLifecycleVersion = '1.0.0-alpha1'
+    archLifecycleVersion = '1.0.0-alpha9-1'
     facebookSdkVersion = '[4,5)'
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
@@ -33,13 +34,13 @@ ext {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     // Architecture component libraries
     implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$archLifecycleVersion"
 
     // Facebook SDK
     compile "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
