@@ -28,23 +28,17 @@ class LoginFragment : Fragment() {
             setReadPermissions("email", "public_profile")
             fragment = this@LoginFragment
             registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
-                override fun onCancel() {
+                override fun onCancel() = Unit
 
-                }
+                override fun onError(exception: FacebookException?) = Unit
 
-                override fun onError(exception: FacebookException?) {
-
-                }
-
-                override fun onSuccess(loginResult: LoginResult?) {
-                    println("Success!!!")
-                }
+                override fun onSuccess(loginResult: LoginResult?) = Unit
             })
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 }
