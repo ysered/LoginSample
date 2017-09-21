@@ -3,6 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+// keystore properties
+def keystorePropertiesFile = rootProject.file("./properties/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -14,8 +19,17 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -43,7 +57,7 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$archLifecycleVersion"
 
     // Facebook SDK
-    compile "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
+    implementation "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
