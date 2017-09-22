@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner, FbLoginObserver.FbLogi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        registry.addObserver(FbLoginObserver(this))
+        registry.addObserver(FbLoginObserver(loginListener = this))
     }
 
     override fun onLoggedIn() {

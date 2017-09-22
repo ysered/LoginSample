@@ -15,21 +15,22 @@ class FbLoginObserver(private val loginListener: FbLoginListener) : LifecycleObs
     fun addTracker() {
         tracker = object : AccessTokenTracker() {
             override fun onCurrentAccessTokenChanged(oldAccessToken: AccessToken?, newAccessToken: AccessToken?) {
-                if (newAccessToken != null)
-                    loginListener.onLoggedIn()
-                else
-                    loginListener.onLoggedOut()
+                handleToken(newAccessToken)
             }
         }
-        if (AccessToken.getCurrentAccessToken() != null)
-            loginListener.onLoggedIn()
-        else
-            loginListener.onLoggedOut()
+        handleToken(AccessToken.getCurrentAccessToken())
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun removeTracker() {
         tracker?.stopTracking()
+    }
+
+    private fun handleToken(accessToken: AccessToken?) {
+        if (accessToken != null)
+            loginListener.onLoggedIn()
+        else
+            loginListener.onLoggedOut()
     }
 
     interface FbLoginListener {
