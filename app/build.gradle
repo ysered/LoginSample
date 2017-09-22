@@ -38,10 +38,12 @@ android {
 }
 
 ext {
+    coroutinesVersion = '0.18'
     supportLibraryVersion = '26.1.0'
     constraintLayoutVersion = '1.0.2'
     archLifecycleVersion = '1.0.0-alpha9-1'
     facebookSdkVersion = '[4,5)'
+    picassoVersion = '2.5.2'
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
 }
@@ -50,6 +52,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Support libraries
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
@@ -59,6 +63,8 @@ dependencies {
 
     // Facebook SDK
     implementation "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
+
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
